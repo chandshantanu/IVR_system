@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/auth-store';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -50,11 +51,18 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-xl font-bold text-center">
-            IVR System
-          </CardTitle>
-          <CardDescription className="text-center">
+        <CardHeader className="space-y-4">
+          <div className="flex justify-center">
+            <Image
+              src="/logo.png"
+              alt="ChatsLytics"
+              width={240}
+              height={64}
+              priority
+              className="h-16 w-auto"
+            />
+          </div>
+          <CardDescription className="text-center text-base">
             Enter your credentials to access the dashboard
           </CardDescription>
         </CardHeader>

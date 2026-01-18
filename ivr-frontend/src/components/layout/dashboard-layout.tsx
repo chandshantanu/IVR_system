@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: '📊' },
@@ -33,7 +34,16 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-foreground">IVR System</h1>
+                <Link href="/dashboard" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+                  <Image
+                    src="/logo.png"
+                    alt="ChatsLytics"
+                    width={180}
+                    height={48}
+                    priority
+                    className="h-10 w-auto"
+                  />
+                </Link>
               </div>
             </div>
             <div className="flex items-center space-x-4">
