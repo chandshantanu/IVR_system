@@ -1,0 +1,110 @@
+{
+  "info": {
+    "_postman_id": "8a75db77-c285-45f0-b85a-82c116c8c778",
+    "name": "Customer testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/44389670-8a75db77-c285-45f0-b85a-82c116c8c778?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "https://chaotix.mum1.exotel.in/v2/accounts/redbus1m/subscriber",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{vault:authorization-password}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "9cba756eb84b6488d983d381f21064b328df0e168a7df73c",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\"subscribers\": [\n{\n\"subscriber_name\": \"Nilesh\"\n,\n\"custom_field\": \"support\"\n},\n{\n},\n{\n}\n\"subscriber\nname\": \"nidhi\"\n_\n\"subscriber\nname\": \"archit\"\n_\n]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://chaotix.mum1.exotel.in/v2/accounts/redbus1m/subscriber",
+          "protocol": "https",
+          "host": [
+            "chaotix",
+            "mum1",
+            "exotel",
+            "in"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "redbus1m",
+            "subscriber"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "https://chaotix.mum1.exotel.in/v2/accounts/redbus1m/subscriber-token",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{vault:authorization-password}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "9cba756eb84b6488d983d381f21064b328df0e168a7df73c",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "    {\n                        \"platform\": \"android\",\n                        \"device_id\": \"26jfegfrhbj8\",\n                        \"subscriber_name\": \"Nilesh\"\n                    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://chaotix.mum1.exotel.in/v2/accounts/redbus1m/subscriber-token",
+          "protocol": "https",
+          "host": [
+            "chaotix",
+            "mum1",
+            "exotel",
+            "in"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "redbus1m",
+            "subscriber-token"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

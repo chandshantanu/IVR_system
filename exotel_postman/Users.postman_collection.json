@@ -1,0 +1,371 @@
+{
+  "info": {
+    "_postman_id": "c50fa8e8-4611-4325-8ef9-5cb90bc397a9",
+    "name": "Users",
+    "description": "[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/22379282-c50fa8e8-4611-4325-8ef9-5cb90bc397a9?action=collection%2Ffork&collection-url=entityId%3D22379282-c50fa8e8-4611-4325-8ef9-5cb90bc397a9%26entityType%3Dcollection%26workspaceId%3Db490bd7c-d3d6-4ee6-b9a6-8b4937d4d820#?env%5BExotel%20SMS%20SGP%5D=W3sia2V5IjoiQXV0aEtleSIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+Iiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6IkF1dGhUb2tlbiIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCB0b2tlbj4iLCJlbmFibGVkIjp0cnVlLCJzZXNzaW9uVmFsdWUiOiI8cmVwbGFjZSB0aGlzIHdpdGggeW91ciBhdXRoIHRva2VuPiIsInNlc3Npb25JbmRleCI6MX0seyJrZXkiOiJTdWJEb21haW4iLCJ2YWx1ZSI6IjxyZXBsYWNlIHRoaXMgd2l0aCB0aGUgYmFzZSBVUkw+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHRoZSBiYXNlIFVSTD4iLCJzZXNzaW9uSW5kZXgiOjJ9LHsia2V5IjoiQWNjb3VudFNpZCIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+Iiwic2Vzc2lvbkluZGV4IjozfV0=)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-c50fa8e8-4611-4325-8ef9-5cb90bc397a9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"first_name\": \"\",\n    \"last_name\": \"\",\n    \"device_contact_uri\": \"\",\n    \"role\": \"\"\n}"
+        },
+        "url": {
+          "raw": "https://ccm-api.exotel.com/v2/accounts/{{AccountSid}}/users",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "users"
+          ]
+        },
+        "description": "**Body Params**\n\n| **Param** | **Description** |\n| --- | --- |\n| first_name | \\[Mandatory\\] The first name of the user on Exotel |\n| last_name | \\[Mandatory\\] The last name of the user on Exotel |\n| email | \\[Optional\\] Unique and valid email ID of the user.  <br>  <br>If not set, the user will not be able to access Exotel's dashboard but calls can be made via CCM APIs provided [user verifies the device](https://support.exotel.com/support/solutions/articles/104361-unverified-number-how-to-verify-my-number-). |\n| device_contact_uri | \\[Optional\\] The phone number of the user. It should be in E.164 format. For VOIP users, this is optional (SIP device will be auto created). |\n| role | \\[Optional\\] Role of the user on Exotel's dashboard. Possible values  <br>  <br>admin  <br>supervisor  <br>user  <br>Default: user (which is an agent with lowest level of access permissions)  <br>  <br>Learn more about role and access [here](https://support.exotel.com/support/solutions/articles/37274-co-workers-access-rights). |\n| device_name | \\[Optional\\] User's device name. This is a friendly name to identify device. |"
+      },
+      "response": []
+    },
+    {
+      "name": "GET Users - Single",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://ccm-api.exotel.com/v2/accounts/{{AccountSid}}/users/:userID",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "users",
+            ":userID"
+          ],
+          "variable": [
+            {
+              "key": "userID",
+              "value": null
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Users - Bulk with filters",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "https://ccm-api.exotel.com/v2/accounts/{{AccountSid}}/users?fields=devices,active_call&devices.contact_uri=07905690278",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "fields",
+              "value": "devices,active_call",
+              "description": "string; to add more fields in the GET response of the user objects.\n\nSupported fields\n\ndevices : If this is set, response will contain the block that will list all the devices under the user\nactive_call : If this is set, response will indicate whether the users are on call or not\nlast_login : If this is set, response will indicate the last login status of the user\nExample:\n/users?fields=devices,active_call,last_login"
+            },
+            {
+              "key": "devices.contact_uri",
+              "value": "07905690278",
+              "description": "string; Your user's device contact URI i.e. phone number in E.164 format or SIP address if VOIP is enabled. The values should be URL encoded, like + should be replaced with %2B.\n\nExample:\n/users?devices.contact_uri=+9199512131xx \n/users?devices.contact_uri=+9199512112xx,+9199512113xx\n/users?devices.contact_uri=sip:1-999-123-4567@voip.exotel.com"
+            },
+            {
+              "key": "email",
+              "value": "email_id_1,email_id_2",
+              "description": "string; Your user's email address as added on Exotel. The values should be URL encoded.\n\nExample:\n/users?email=<email-id>\n/users?email=<email-id-1>,<email-id-2>",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DELETE user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://ccm-api.exotel.com/v2/accounts/{{AccountSid}}/users/:userID",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "users",
+            ":userID"
+          ],
+          "variable": [
+            {
+              "key": "userID",
+              "value": null,
+              "description": "ID of the user that is to be deleted"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "UPDATE user",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "",
+            "disabled": true
+          },
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"first_name\":\"Chirag\",\n    \"last_name\":\"Singhal\"\n}"
+        },
+        "url": {
+          "raw": "https://ccm-api.exotel.com/v2/accounts/{{AccountSid}}/users/:userID",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "users",
+            ":userID"
+          ],
+          "variable": [
+            {
+              "key": "userID",
+              "value": null,
+              "description": "ID of the user that is to be updated"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Device",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"available\": false\n}\n"
+        },
+        "url": {
+          "raw": "https://ccm-api.exotel.in/v2/accounts/{{AccountSid}}/users/:userUUID/devices/:deviceID",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "in"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "users",
+            ":userUUID",
+            "devices",
+            ":deviceID"
+          ],
+          "variable": [
+            {
+              "key": "userUUID",
+              "value": null,
+              "description": "UUID of the user whose device needs to be updated"
+            },
+            {
+              "key": "deviceID",
+              "value": null,
+              "description": "ID of the device that needs to be updated"
+            }
+          ]
+        },
+        "description": "This API will allow a particular user's device availability to be turned ON or OFF."
+      },
+      "response": []
+    }
+  ]
+}

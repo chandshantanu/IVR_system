@@ -1,0 +1,99 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.code-workspace
+
+# Docker volumes & data
+postgres_data/
+redis_data/
+*.sql
+*.db
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.cache/
+
+# Testing
+coverage/
+.nyc_output/
+*.test.js.snap
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/
+temp/
+
+# Claude artifacts
+.claude/
+
+# Development tools
+.playwright-mcp/
+ExotelMCP/
+
+# Test scripts (keep essential ones, ignore temporary test scripts)
+test_*.js
+check_*.js
+sync_*.js
+extract_*.js
+*_test.js
+*_debug.js
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Misc
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+*.pem
+
+# Lock files (optional - uncomment if you want to ignore)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml

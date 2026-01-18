@@ -1,0 +1,496 @@
+{
+  "info": {
+    "_postman_id": "49188dbf-356b-4ec1-a499-437d1e6a732b",
+    "name": "Bridge (LeadAssist)",
+    "description": "[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/22379282-49188dbf-356b-4ec1-a499-437d1e6a732b?action=collection%2Ffork&collection-url=entityId%3D22379282-49188dbf-356b-4ec1-a499-437d1e6a732b%26entityType%3Dcollection%26workspaceId%3Db490bd7c-d3d6-4ee6-b9a6-8b4937d4d820#?env%5BExotel%20SMS%20SGP%5D=W3sia2V5IjoiQXV0aEtleSIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+Iiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6IkF1dGhUb2tlbiIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCB0b2tlbj4iLCJlbmFibGVkIjp0cnVlLCJzZXNzaW9uVmFsdWUiOiI8cmVwbGFjZSB0aGlzIHdpdGggeW91ciBhdXRoIHRva2VuPiIsInNlc3Npb25JbmRleCI6MX0seyJrZXkiOiJTdWJEb21haW4iLCJ2YWx1ZSI6IjxyZXBsYWNlIHRoaXMgd2l0aCB0aGUgYmFzZSBVUkw+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHRoZSBiYXNlIFVSTD4iLCJzZXNzaW9uSW5kZXgiOjJ9LHsia2V5IjoiQWNjb3VudFNpZCIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+Iiwic2Vzc2lvbkluZGV4IjozfV0=)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-49188dbf-356b-4ec1-a499-437d1e6a732b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GreenPin",
+      "item": [
+        {
+          "name": "create a PIN allocation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/javascript",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"transaction_id\": \"exotelt_13\",\n    \"a\": {\n        \"vns\": [\n            \"0XXX9780699\"\n        ],\n        \"numbers\": [\n            \"+919594999XXX\"\n        ]\n    },\n    \"b\": {\n        \"numbers\": [\n            \"+919956555625\"\n        ]\n    },\n    \"usage\": \"twoway\",\n    \"deallocation_policy\": {\n        \"duration\": \"100s\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/greenpin",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "greenpin"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete a PIN allocation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/greenpin/:greenPinID",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "greenpin",
+                ":greenPinID"
+              ],
+              "variable": [
+                {
+                  "key": "greenPinID",
+                  "value": null,
+                  "description": "ID of Green Pin that is to be deleted"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get details of a PIN allocation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/greenpin/:greenPinID",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "greenpin",
+                ":greenPinID"
+              ],
+              "variable": [
+                {
+                  "key": "greenPinID",
+                  "value": null,
+                  "description": "ID of the green pin that is to be gotten"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update a PIN allocation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"deallocation_policy\": {\n        \"duration\": \"10s\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/greenpin/:greenPinID",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "greenpin",
+                ":greenPinID"
+              ],
+              "variable": [
+                {
+                  "key": "greenPinID",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GreenVN",
+      "item": [
+        {
+          "name": "create a VN allocation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"connection_id\": \"exotelt_test-30016\",\n    \"aparty_numbers\": [\n        \"+919594999XXX\"\n    ],\n    \"bparty_numbers\": [\n        \"+918108888XXX\"\n    ],\n    \"usage\": \"twoway\",\n    \"deallocation_policy\": {\n        \"duration\": \"1d\"\n    },\n    \"strictness\": \"true\",\n    \"preferences\": {\n        \"greenvn\": \"+911414931XXX\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/greenvn",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "greenvn"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete a VN allocation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/greenvn/:greenVNID",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "greenvn",
+                ":greenVNID"
+              ],
+              "variable": [
+                {
+                  "key": "greenVNID",
+                  "value": null,
+                  "description": "ID of the green VN that is to be deallocated"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get details of a VN allocation",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/greenvn/:greenVNID",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "greenvn",
+                ":greenVNID"
+              ],
+              "variable": [
+                {
+                  "key": "greenVNID",
+                  "value": null,
+                  "description": "ID of the green VN that is to be gotten"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Setting",
+      "item": [
+        {
+          "name": "update Bridge settings",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/settings",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "settings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get Bridge settings",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{AuthToken}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{AuthKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "showPassword",
+                  "value": false,
+                  "type": "boolean"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"common\":{\n        \"max_deallocation_time\": \"-1\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://{{SubDomain}}/v1/tenants/{{AccountSid}}/settings",
+              "protocol": "https",
+              "host": [
+                "{{SubDomain}}"
+              ],
+              "path": [
+                "v1",
+                "tenants",
+                "{{AccountSid}}",
+                "settings"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

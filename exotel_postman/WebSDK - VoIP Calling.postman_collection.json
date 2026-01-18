@@ -1,0 +1,618 @@
+{
+  "info": {
+    "_postman_id": "0fc09e6e-8fdf-4dbd-8228-6b1888c109e6",
+    "name": "WebSDK | VoIP Calling",
+    "description": "Power your custom CRM / website with VoIP calling. Exotel, having procured the UL-VNO licence will be able to intermix IP and PSTN calls, giving you the best of both worlds. This collection has APIs to create Apps and Users - prerequisites for you to get started. The SDK and its documentation is present [here](https://github.com/exotel/exotel_websdk_crm). For a more detailed overview, check the [support article](https://support.exotel.com/support/solutions/articles/3000120566-ip-pstn-intermix-customer-onboarding-and-webrtc-sdk-integration).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-0fc09e6e-8fdf-4dbd-8228-6b1888c109e6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "App",
+      "item": [
+        {
+          "name": "Create App Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();",
+                  "pm.environment.set(\"AuthCode\", response.Data);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Id\": \"{{appId}}\",\n\t\"Secret\": \"{{appSecret}}\",\n\t\"Entity\": \"{{app}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/token",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create an App",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();",
+                  "pm.environment.set(\"AppId\", response.AppID);",
+                  "pm.environment.set(\"AppSecret\", response.AppSecret);"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{CustomerAuthCode}}",
+                "description": "data value provided by customer token API"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"AppName\" : {{AppName}},\n    \"ExotelAccountSid\": {{AccountSId}},\n\t\"ExotelApiKey\": {{ApiKey}},\n\t\"ExotelApiToken\": {{ApiToken}},\n\t\"ExotelDomain\": {{AccountRegion}},\n\t\"IsActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Apps By CustomerId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{CustomerAuthCode}}",
+                "description": "data value provided by customer token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app?entity=customer",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app"
+              ],
+              "query": [
+                {
+                  "key": "entity",
+                  "value": "customer"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Apps By AppId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete App By AppId",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "App Settings",
+      "item": [
+        {
+          "name": "Add new Setting",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{   \n\t\"Key\": \"{{configKey}}\",\n\t\"Value\" : \"{{webhookURL}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app_setting",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app_setting"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get App Setting By Key",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app_setting?key={{configKey}}",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app_setting"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{configKey}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get App Settings By AppId",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app_setting",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app_setting"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete App Setting",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/app_setting?key={{configKey}}",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "app_setting"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{configKey}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Create User Under App",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"AppUserId\": \"{{AppUserId}}\",\n        \"AppUsername\": \"{{UserName}}\",\n        \"Email\": \"{{Email}}\",\n        \"ExotelAccountSid\": {{AccountSId}},\n        \"ExotelUserName\": \"{{UserName}}\",\n        \"AgentNumber\": \"{{AgentMobileNumber}}\",\n        \"VirtualNumber\": \"{{ExophoneNumber}}\"\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/usermapping",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "usermapping"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/usermapping?user_id={{appUserId}}",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "usermapping"
+              ],
+              "query": [
+                {
+                  "key": "user_id",
+                  "value": "{{appUserId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete all Users under App",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/usermapping",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "usermapping"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User by UserId",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\"{{AppUserId}}\",\"{{AppUserId}}\"]\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/users",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get App User with Pagination",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/usermapping?last_value={{optional}}&page_size={{optional}}",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "usermapping"
+              ],
+              "query": [
+                {
+                  "key": "last_value",
+                  "value": "{{optional}}",
+                  "description": "It required for next page value, gather from previous page.\nDefault value: 0"
+                },
+                {
+                  "key": "page_size",
+                  "value": "{{optional}}",
+                  "description": "Default page size is 20"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User's Device",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{AuthCode}}",
+                "description": "data value provided by app token API"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"UserId\": \"{{appUserId}}\",\n\t\"DeviceName\": \"{{phone or sip}}\",\n\t\"DeviceStatus\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/device",
+              "protocol": "https",
+              "host": [
+                "integrationscore",
+                "mum1",
+                "exotel",
+                "com"
+              ],
+              "path": [
+                "v2",
+                "integrations",
+                "device"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Create Customer Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "let response = pm.response.json();",
+              "pm.environment.set(\"CustomerAuthCode\", response.Data);"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"Id\": \"{{CustomerId}}\",\n\t\"Secret\": \"{{CustomerSecret}}\",\n\t\"Entity\": \"customer\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://integrationscore.mum1.exotel.com/v2/integrations/token",
+          "protocol": "https",
+          "host": [
+            "integrationscore",
+            "mum1",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "integrations",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

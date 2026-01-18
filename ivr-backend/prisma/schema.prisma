@@ -1,0 +1,424 @@
+// Prisma Schema for IVR System
+// Database: PostgreSQL 15+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// USER MANAGEMENT & AUTHENTICATION
+// ============================================================================
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  fullName     String?   @map("full_name")
+  role         String    // super_admin, admin, manager, agent
+  isActive     Boolean   @default(true) @map("is_active")
+  lastLoginAt  DateTime? @map("last_login_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  flows               IvrFlow[]
+  auditLogs           AuditLog[]
+  phoneNumberAssignments UserPhoneNumberAssignment[]
+  managedDepartments  Department[] // Departments where this user is the manager
+
+  @@map("users")
+}
+
+// ============================================================================
+// DEPARTMENT MANAGEMENT
+// ============================================================================
+
+model Department {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  managerId   Int?     @map("manager_id")
+  phoneNumber String?  @map("phone_number") // Department-specific phone number
+  email       String?
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  agents  Agent[]
+  manager User?   @relation(fields: [managerId], references: [id])
+
+  @@index([managerId])
+  @@index([isActive])
+  @@map("departments")
+}
+
+// ============================================================================
+// IVR FLOW ENGINE
+// ============================================================================
+
+model IvrFlow {
+  id            Int       @id @default(autoincrement())
+  name          String
+  description   String?
+  flowType      String    @map("flow_type") // inbound, outbound, internal
+  status        String    @default("draft") // draft, active, archived
+  version       Int       @default(1)
+  isPublished   Boolean   @default(false) @map("is_published")
+  entryNodeId   Int?      @map("entry_node_id")
+  configuration Json?     // Additional flow-level config
+  createdById   Int       @map("created_by")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  publishedAt   DateTime? @map("published_at")
+
+  // Relations
+  createdBy   User              @relation(fields: [createdById], references: [id])
+  nodes       FlowNode[]
+  connections FlowConnection[]
+  executions  FlowExecution[]
+
+  @@unique([name, version])
+  @@map("ivr_flows")
+}
+
+model FlowNode {
+  id            Int      @id @default(autoincrement())
+  flowId        Int      @map("flow_id")
+  nodeType      String   @map("node_type") // welcome, menu, play, queue, transfer, record, decision, gather, api, hangup
+  name          String
+  positionX     Int?     @map("position_x") // Canvas position for UI
+  positionY     Int?     @map("position_y")
+  configuration Json // Node-specific config (messages, DTMF mappings, timeouts, etc.)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  flow              IvrFlow          @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  sourceConnections FlowConnection[] @relation("SourceNode")
+  targetConnections FlowConnection[] @relation("TargetNode")
+  nodeExecutions    NodeExecution[]
+
+  @@index([flowId])
+  @@map("flow_nodes")
+}
+
+model FlowConnection {
+  id             Int      @id @default(autoincrement())
+  flowId         Int      @map("flow_id")
+  sourceNodeId   Int      @map("source_node_id")
+  targetNodeId   Int      @map("target_node_id")
+  condition      String? // e.g., "dtmf_1", "timeout", "agent_available"
+  conditionValue String?  @map("condition_value")
+  label          String? // Display label for UI
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  flow       IvrFlow  @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  sourceNode FlowNode @relation("SourceNode", fields: [sourceNodeId], references: [id], onDelete: Cascade)
+  targetNode FlowNode @relation("TargetNode", fields: [targetNodeId], references: [id], onDelete: Cascade)
+
+  @@index([flowId])
+  @@index([sourceNodeId])
+  @@index([targetNodeId])
+  @@map("flow_connections")
+}
+
+// ============================================================================
+// CALL EXECUTION & TRACKING
+// ============================================================================
+
+model FlowExecution {
+  id               Int       @id @default(autoincrement())
+  flowId           Int       @map("flow_id")
+  callSid          String    @unique @map("call_sid") // Exotel CallSid
+  callerNumber     String    @map("caller_number")
+  calledNumber     String    @map("called_number")
+  currentNodeId    Int?      @map("current_node_id")
+  status           String // in_progress, completed, failed, abandoned
+  startedAt        DateTime  @default(now()) @map("started_at")
+  endedAt          DateTime? @map("ended_at")
+  durationSeconds  Int?      @map("duration_seconds")
+  contextVariables Json?     @map("context_variables") // Store flow variables (language, account_number, etc.)
+  errorMessage     String?   @map("error_message")
+  recordingUrl     String?   @map("recording_url")
+
+  // Relations
+  flow           IvrFlow         @relation(fields: [flowId], references: [id])
+  nodeExecutions NodeExecution[]
+  queueEntries   CallQueueEntry[]
+
+  @@index([callSid])
+  @@index([flowId])
+  @@index([status])
+  @@index([startedAt])
+  @@map("flow_executions")
+}
+
+model NodeExecution {
+  id           Int       @id @default(autoincrement())
+  executionId  Int       @map("execution_id")
+  nodeId       Int       @map("node_id")
+  nodeType     String    @map("node_type")
+  enteredAt    DateTime  @default(now()) @map("entered_at")
+  exitedAt     DateTime? @map("exited_at")
+  status       String? // success, failed, timeout
+  inputData    Json?     @map("input_data") // Input received (DTMF, user input, etc.)
+  outputData   Json?     @map("output_data") // Output produced
+  errorMessage String?   @map("error_message")
+
+  // Relations
+  execution FlowExecution @relation(fields: [executionId], references: [id], onDelete: Cascade)
+  node      FlowNode      @relation(fields: [nodeId], references: [id])
+
+  @@index([executionId])
+  @@index([nodeId])
+  @@map("node_executions")
+}
+
+// ============================================================================
+// AGENT & QUEUE MANAGEMENT
+// ============================================================================
+
+model Agent {
+  id                 Int         @id @default(autoincrement())
+  agentNumber        String      @unique @map("agent_number")
+  agentName          String      @map("agent_name")
+  email              String?
+  departmentId       Int?        @map("department_id")
+  skills             Json?       // Array of skills for routing
+  status             String      @default("offline") // online, offline, busy, on_call
+  maxConcurrentCalls Int         @default(1) @map("max_concurrent_calls")
+  priority           Int         @default(1) // Higher priority agents get calls first
+  createdAt          DateTime    @default(now()) @map("created_at")
+  updatedAt          DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  department       Department?     @relation(fields: [departmentId], references: [id])
+  queueAssignments CallQueueEntry[]
+
+  @@index([departmentId])
+  @@map("agents")
+}
+
+model Queue {
+  id                          Int      @id @default(autoincrement())
+  name                        String   @unique
+  description                 String?
+  maxSize                     Int      @default(100) @map("max_size")
+  maxWaitTimeSeconds          Int      @default(300) @map("max_wait_time_seconds")
+  musicOnHoldUrl              String?  @map("music_on_hold_url")
+  announcementIntervalSeconds Int      @default(30) @map("announcement_interval_seconds")
+  strategy                    String   @default("round_robin") // round_robin, longest_idle, priority
+  overflowAction              String?  @map("overflow_action") // voicemail, callback, hangup
+  overflowTarget              String?  @map("overflow_target")
+  createdAt                   DateTime @default(now()) @map("created_at")
+  updatedAt                   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  entries CallQueueEntry[]
+
+  @@map("queues")
+}
+
+model CallQueueEntry {
+  id              Int       @id @default(autoincrement())
+  queueId         Int       @map("queue_id")
+  executionId     Int       @map("execution_id")
+  callSid         String    @map("call_sid")
+  position        Int // Position in queue
+  enteredAt       DateTime  @default(now()) @map("entered_at")
+  assignedAgentId Int?      @map("assigned_agent_id")
+  exitedAt        DateTime? @map("exited_at")
+  waitTimeSeconds Int?      @map("wait_time_seconds")
+  exitReason      String? // connected, timeout, abandoned, overflow
+
+  // Relations
+  queue         Queue         @relation(fields: [queueId], references: [id])
+  execution     FlowExecution @relation(fields: [executionId], references: [id])
+  assignedAgent Agent?        @relation(fields: [assignedAgentId], references: [id])
+
+  @@index([queueId])
+  @@index([callSid])
+  @@map("call_queue_entries")
+}
+
+// ============================================================================
+// BUSINESS CONFIGURATION
+// ============================================================================
+
+model BusinessHours {
+  id         Int      @id @default(autoincrement())
+  name       String
+  timezone   String   @default("UTC")
+  schedule   Json // Weekly schedule: { "monday": [{"start": "09:00", "end": "17:00"}], ... }
+  holidays   Json? // Array of holiday dates
+  isDefault  Boolean  @default(false) @map("is_default")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("business_hours")
+}
+
+// ============================================================================
+// EXOTEL CALLBACKS (Ported from Spring Boot)
+// ============================================================================
+
+model VoiceCallback {
+  id             Int      @id @default(autoincrement())
+  userId         String?  @map("user_id")
+  sid            String?
+  parentCallSid  String?  @map("parent_call_sid")
+  dateCreated    String?  @map("date_created")
+  dateUpdated    String?  @map("date_updated")
+  accountSid     String?  @map("account_sid")
+  toNumber       String?  @map("to_number")
+  fromNumber     String?  @map("from_number")
+  phoneNumberSid String?  @map("phone_number_sid")
+  startTime      String?  @map("start_time")
+  endTime        String?  @map("end_time")
+  duration       String?
+  price          String?
+  direction      String?
+  answeredBy     String?  @map("answered_by")
+  forwardedFrom  String?  @map("forwarded_from")
+  callerName     String?  @map("caller_name")
+  uri            String?
+  recordingUrl   String?  @map("recording_url")
+  callSid        String   @unique @map("call_sid") // Made required and unique to prevent duplicates
+  status         String?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@index([sid])
+  @@map("voice_callbacks")
+}
+
+model SmsCallback {
+  id                 Int      @id @default(autoincrement())
+  userId             String?  @map("user_id")
+  smsSid             String   @unique @map("sms_sid") // Made required and unique to prevent duplicates
+  toNumber           String?  @map("to_number")
+  status             String?
+  detailedStatus     String?  @map("detailed_status")
+  detailedStatusCode String?  @map("detailed_status_code")
+  smsUnits           String?  @map("sms_units")
+  dateSent           String?  @map("date_sent")
+  createdAt          DateTime @default(now()) @map("created_at")
+
+  @@map("sms_callbacks")
+}
+
+// ============================================================================
+// AUDIT & LOGGING
+// ============================================================================
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  userId     Int?     @map("user_id")
+  action     String // login, create_flow, update_flow, delete_flow, etc.
+  entityType String?  @map("entity_type") // flow, node, user, agent
+  entityId   Int?     @map("entity_id")
+  changes    Json? // JSON diff of changes
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ============================================================================
+// EXOTEL MONITORING
+// ============================================================================
+
+model HealthCheck {
+  id               Int      @id @default(autoincrement())
+  timestamp        DateTime
+  statusType       String   @map("status_type") // OK, WARNING, ERROR
+  incomingAffected Boolean? @map("incoming_affected")
+  outgoingAffected Boolean? @map("outgoing_affected")
+  rawData          Json?    @map("raw_data") // Full response from HeartBeat API
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  @@index([timestamp])
+  @@index([statusType])
+  @@map("health_checks")
+}
+
+model SyncStatus {
+  id            Int      @id @default(autoincrement())
+  syncType      String   @map("sync_type") // bulk_call_details, heartbeat
+  lastSyncTime  DateTime @map("last_sync_time")
+  status        String // success, failed, in_progress
+  recordsSynced Int?     @map("records_synced")
+  errorMessage  String?  @map("error_message")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@index([syncType])
+  @@index([lastSyncTime])
+  @@map("sync_status")
+}
+
+// ============================================================================
+// PHONE NUMBER MANAGEMENT
+// ============================================================================
+
+model PhoneNumber {
+  id             Int      @id @default(autoincrement())
+  number         String   @unique // E.164 format: +919876543210
+  friendlyName   String?  @map("friendly_name") // Exotel phone number name
+  departmentName String?  @map("department_name") // User-configured department: "Sales", "Support", "Billing"
+  type           String   @default("exophone") // exophone, sip, landline
+  isActive       Boolean  @default(true) @map("is_active")
+  isPrimary      Boolean  @default(false) @map("is_primary") // Primary number for metrics
+  capabilities   Json? // {"voice": true, "sms": true, "recording": true}
+  metadata       Json? // Additional data: {"department": "sales", "region": "mumbai"}
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  userAssignments UserPhoneNumberAssignment[]
+
+  @@index([number])
+  @@index([isActive])
+  @@index([isPrimary])
+  @@map("phone_numbers")
+}
+
+// ============================================================================
+// USER-PHONE NUMBER ASSIGNMENTS (Access Control)
+// ============================================================================
+
+model UserPhoneNumberAssignment {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @map("user_id")
+  phoneNumberId Int      @map("phone_number_id")
+  canViewCalls  Boolean  @default(true) @map("can_view_calls") // View call history
+  canViewRecordings Boolean @default(true) @map("can_view_recordings") // Access recordings
+  canViewAnalytics Boolean @default(true) @map("can_view_analytics") // View analytics/metrics
+  assignedBy    Int?     @map("assigned_by") // User ID who made the assignment
+  assignedAt    DateTime @default(now()) @map("assigned_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phoneNumber PhoneNumber @relation(fields: [phoneNumberId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, phoneNumberId]) // Prevent duplicate assignments
+  @@index([userId])
+  @@index([phoneNumberId])
+  @@map("user_phone_number_assignments")
+}

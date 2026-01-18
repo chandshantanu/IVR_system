@@ -1,0 +1,618 @@
+{
+  "info": {
+    "_postman_id": "861be900-109e-4a8f-bd2c-71f69c71b636",
+    "name": "SMS Campaigns",
+    "description": "[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/22379282-861be900-109e-4a8f-bd2c-71f69c71b636?action=collection%2Ffork&collection-url=entityId%3D22379282-861be900-109e-4a8f-bd2c-71f69c71b636%26entityType%3Dcollection%26workspaceId%3Db490bd7c-d3d6-4ee6-b9a6-8b4937d4d820#?env%5BExotel%20SMS%20SGP%5D=W3sia2V5IjoiQXV0aEtleSIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+Iiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6IkF1dGhUb2tlbiIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCB0b2tlbj4iLCJlbmFibGVkIjp0cnVlLCJzZXNzaW9uVmFsdWUiOiI8cmVwbGFjZSB0aGlzIHdpdGggeW91ciBhdXRoIHRva2VuPiIsInNlc3Npb25JbmRleCI6MX0seyJrZXkiOiJTdWJEb21haW4iLCJ2YWx1ZSI6IjxyZXBsYWNlIHRoaXMgd2l0aCB0aGUgYmFzZSBVUkw+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHRoZSBiYXNlIFVSTD4iLCJzZXNzaW9uSW5kZXgiOjJ9LHsia2V5IjoiQWNjb3VudFNpZCIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+Iiwic2Vzc2lvbkluZGV4IjozfV0=)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-861be900-109e-4a8f-bd2c-71f69c71b636?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create SMS campaign",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "cache-control",
+            "value": "no-cache"
+          },
+          {
+            "key": "content-type",
+            "value": "application/json"
+          },
+          {
+            "key": "postman-token",
+            "value": "79f6440f-73bc-7235-51df-cc6f00d29a99"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n        \"name\": \"smsExotel\",\n        \"content_type\": \"static\",\n        \"lists\":[\n            \"1901b59777ef4294a3b9e4f48aaecOPP\"\n        ],\n         \"schedule\": {\n                \"start_time\": \"2022-05-13T08:58:00+05:30\",\n                \"end_time\": \"2022-05-16T09:02:00+05:30\"\n        },\n        \"dlt_template_id\" : \"1107160086246601921\",\n        \"dlt_entity_id\" : \"1101428740000012125\",\n        \"sender_id\" : \"EXOTEL\",\n        \"sms_type\": \"transactional\",\n        \"template\" : \"नमस्कार captain, this is a test SMS from Exotel\",\n        \"email\": \"captain.exotel@exotel.in\"\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/sms-campaigns",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "sms-campaigns"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get single SMS campaign",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept-encoding": true,
+          "connection": true,
+          "user-agent": true
+        }
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "authority",
+            "value": "test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"89\", \"Chromium\";v=\"89\", \";Not A Brand\";v=\"99\"",
+            "disabled": true
+          },
+          {
+            "key": "accept",
+            "value": "application/json, text/plain, */*",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0",
+            "disabled": true
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+            "disabled": true
+          },
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=----WebKitFormBoundaryaJirYv3mOl6AZNxV",
+            "disabled": true
+          },
+          {
+            "key": "origin",
+            "value": "https://test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "same-origin",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "cors",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "empty",
+            "disabled": true
+          },
+          {
+            "key": "referer",
+            "value": "https://test.exotel.com/Exotel/campaigns_v2/",
+            "disabled": true
+          },
+          {
+            "key": "accept-language",
+            "value": "en-GB,en-US;q=0.9,en;q=0.8",
+            "disabled": true
+          },
+          {
+            "key": "cookie",
+            "value": "_BEAMER_FIRST_VISIT_zjgijTOv17039=2021-03-05T14:47:18.237Z; _BEAMER_DATE_zjgijTOv17039=2021-04-16T12:52:38.762Z; _BEAMER_LAST_PUSH_PROMPT_INTERACTION_zjgijTOv17039=1622541713989; _BEAMER_USER_ID_zjgijTOv17039=b2dff76f-8ae4-403d-8fd7-37b9beb77f1f; _fbp=fb.1.1626946358405.1759689054; _gcl_au=1.1.901627027.1627906451; zabUserId=1628161767420zabu0.3587311286521486; _hp2_props.2826793817=%7B%22account_state%22%3A%22active%22%2C%22account_plan%22%3A%22Estate%20Jan%2019%22%2C%22billing_cycle%22%3Anull%7D; _BEAMER_USER_ID_CkAnkUkX19260=03e97db3-6b16-4083-8d9f-d0effb6102f0; _BEAMER_FIRST_VISIT_CkAnkUkX19260=2021-08-13T12:52:47.941Z; _BEAMER_DATE_CkAnkUkX19260=2021-05-16T06:37:13.000Z; _hp2_id.2826793817=%7B%22userId%22%3A%228313626585973303%22%2C%22pageviewId%22%3A%223973346851892971%22%2C%22sessionId%22%3A%223055046360591346%22%2C%22identity%22%3A%223011494817%22%2C%22trackerVersion%22%3A%224.0%22%2C%22identityField%22%3Anull%2C%22isIdentified%22%3A1%7D; utms=%7B%22utm_source%22%3A%22google%22%2C%22utm_medium%22%3A%22cpc%22%2C%22utm_campaign%22%3A%22ET-002-Search-SG-Brand%22%2C%22utm_term%22%3A%22exotel%22%7D; _gac_UA-24392938-1=1.1631533352.CjwKCAjw7fuJBhBdEiwA2lLMYWN4BVC12Tr2gxTCbjCA52uKdP63JyZkDiMA-lBk3_FGom5jSJeX1xoCEn8QAvD_BwE; cl3826bfck60ze_uid=cl3826bfck60ze639d2207-57d8-4c27-b468-1b72c69655bf; cl3826bfck60ze_sid=CL-c4795c4a-c817-43b3-8f27; cl3826bfck60ze_gid=cl3826bfck60ze8709e3f5-3be1-47e6-a45d-f545e15368b2; cl3826bfck60ze_eidsTracked=true; redial-list=%7B%22maxRedial%22%3A10%2C%22redialList%22%3A%5B%2208789063359%22%5D%7D; __ca__chat=jscqybss99zw; zps-tgr-dts=sc%3D15-expAppOnNewSession%3D%5B%5D-pc%3D7-sesst%3D1632547214353; _fw_crm_v=253cf6cc-5687-43f5-f708-beedddff0291; _gid=GA1.2.2012369787.1632675917; exoteloblx_session=a%3A28%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22f784dd41117eda7ece8d08a19185c416%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22103.147.128.118%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A50%3A%22Mozilla%2F5.0+%28X11%3B+Linux+x86_64%29+AppleWebKit%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bs%3A10%3A%221632985339%22%3Bs%3A10%3A%22created_at%22%3Bs%3A10%3A%221632548721%22%3Bs%3A9%3A%22CSRFToken%22%3Bs%3A32%3A%220222f842e69abac855b19f6f03bd6bff%22%3Bs%3A5%3A%22email%22%3Bs%3A29%3A%22kunal.keshri%2BExotel%40exotel.in%22%3Bs%3A7%3A%22user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A8%3A%22is_admin%22%3Bs%3A1%3A%221%22%3Bs%3A8%3A%22loggedin%22%3Bs%3A1%3A%221%22%3Bs%3A9%3A%22signature%22%3Bs%3A40%3A%226817f9e40f58f3f76b67eff20893d4ff20a10e7c%22%3Bs%3A11%3A%22permissions%22%3Bs%3A6%3A%22524287%22%3Bs%3A4%3A%22role%22%3Bs%3A5%3A%22admin%22%3Bs%3A9%3A%22tenant_id%22%3Bs%3A2%3A%2215%22%3Bs%3A10%3A%22session-id%22%3Bs%3A32%3A%22963e1fb30031c31c1de6dc9626e1d4f7%22%3Bs%3A20%3A%22exometrix_user_email%22%3Bs%3A27%3A%22sudheer.shet%2Buber%40exotel.in%22%3Bs%3A17%3A%22exometrix_user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A13%3A%22impersonation%22%3Bs%3A1%3A%221%22%3Bs%3A21%3A%22appstore_noappbuilder%22%3Bs%3A0%3A%22%22%3Bs%3A22%3A%22isNumberMaskingEnabled%22%3Bs%3A0%3A%22%22%3Bs%3A18%3A%22lead_assist_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A17%3A%22telephonix_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22package_pricing%22%3Bs%3A1%3A%221%22%3Bs%3A13%3A%22graphite_user%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22gateway_user%22%3Bs%3A1%3A%221%22%3Bs%3A27%3A%22call_rating_feature_enabled%22%3Bs%3A0%3A%22%22%3Bs%3A13%3A%22import_export%22%3Bs%3A1%3A%221%22%3Bs%3A14%3A%22account-closed%22%3Bs%3A1%3A%220%22%3B%7D041bd5c46509a3b6a96c12b7cca0cb1e; _BEAMER_FILTER_BY_URL_zjgijTOv17039=false; _BEAMER_LAST_UPDATE_zjgijTOv17039=1632985460667; _ga=GA1.2.1430747560.1614955619; _gat_UA-24392938-7=1; _ga_VDLHZGRNP9=GS1.1.1632985342.140.1.1632985510.60",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/sms-campaigns/:campaignID",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "sms-campaigns",
+            ":campaignID"
+          ],
+          "variable": [
+            {
+              "key": "campaignID",
+              "value": null,
+              "description": "ID of campaign to be gotten"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get bulk SMS campaigns",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept-encoding": true,
+          "user-agent": true,
+          "connection": true
+        }
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "authority",
+            "value": "test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"89\", \"Chromium\";v=\"89\", \";Not A Brand\";v=\"99\"",
+            "disabled": true
+          },
+          {
+            "key": "accept",
+            "value": "application/json, text/plain, */*",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0",
+            "disabled": true
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+            "disabled": true
+          },
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=----WebKitFormBoundaryaJirYv3mOl6AZNxV",
+            "disabled": true
+          },
+          {
+            "key": "origin",
+            "value": "https://test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "same-origin",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "cors",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "empty",
+            "disabled": true
+          },
+          {
+            "key": "referer",
+            "value": "https://test.exotel.com/Exotel/campaigns_v2/",
+            "disabled": true
+          },
+          {
+            "key": "accept-language",
+            "value": "en-GB,en-US;q=0.9,en;q=0.8",
+            "disabled": true
+          },
+          {
+            "key": "cookie",
+            "value": "_BEAMER_FIRST_VISIT_zjgijTOv17039=2021-03-05T14:47:18.237Z; _BEAMER_DATE_zjgijTOv17039=2021-04-16T12:52:38.762Z; _BEAMER_LAST_PUSH_PROMPT_INTERACTION_zjgijTOv17039=1622541713989; _BEAMER_USER_ID_zjgijTOv17039=b2dff76f-8ae4-403d-8fd7-37b9beb77f1f; _fbp=fb.1.1626946358405.1759689054; _gcl_au=1.1.901627027.1627906451; zabUserId=1628161767420zabu0.3587311286521486; _hp2_props.2826793817=%7B%22account_state%22%3A%22active%22%2C%22account_plan%22%3A%22Estate%20Jan%2019%22%2C%22billing_cycle%22%3Anull%7D; _BEAMER_USER_ID_CkAnkUkX19260=03e97db3-6b16-4083-8d9f-d0effb6102f0; _BEAMER_FIRST_VISIT_CkAnkUkX19260=2021-08-13T12:52:47.941Z; _BEAMER_DATE_CkAnkUkX19260=2021-05-16T06:37:13.000Z; _hp2_id.2826793817=%7B%22userId%22%3A%228313626585973303%22%2C%22pageviewId%22%3A%223973346851892971%22%2C%22sessionId%22%3A%223055046360591346%22%2C%22identity%22%3A%223011494817%22%2C%22trackerVersion%22%3A%224.0%22%2C%22identityField%22%3Anull%2C%22isIdentified%22%3A1%7D; utms=%7B%22utm_source%22%3A%22google%22%2C%22utm_medium%22%3A%22cpc%22%2C%22utm_campaign%22%3A%22ET-002-Search-SG-Brand%22%2C%22utm_term%22%3A%22exotel%22%7D; _gac_UA-24392938-1=1.1631533352.CjwKCAjw7fuJBhBdEiwA2lLMYWN4BVC12Tr2gxTCbjCA52uKdP63JyZkDiMA-lBk3_FGom5jSJeX1xoCEn8QAvD_BwE; cl3826bfck60ze_uid=cl3826bfck60ze639d2207-57d8-4c27-b468-1b72c69655bf; cl3826bfck60ze_sid=CL-c4795c4a-c817-43b3-8f27; cl3826bfck60ze_gid=cl3826bfck60ze8709e3f5-3be1-47e6-a45d-f545e15368b2; cl3826bfck60ze_eidsTracked=true; redial-list=%7B%22maxRedial%22%3A10%2C%22redialList%22%3A%5B%2208789063359%22%5D%7D; __ca__chat=jscqybss99zw; zps-tgr-dts=sc%3D15-expAppOnNewSession%3D%5B%5D-pc%3D7-sesst%3D1632547214353; _fw_crm_v=253cf6cc-5687-43f5-f708-beedddff0291; _gid=GA1.2.2012369787.1632675917; exoteloblx_session=a%3A28%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22f784dd41117eda7ece8d08a19185c416%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22103.147.128.118%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A50%3A%22Mozilla%2F5.0+%28X11%3B+Linux+x86_64%29+AppleWebKit%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bs%3A10%3A%221632985339%22%3Bs%3A10%3A%22created_at%22%3Bs%3A10%3A%221632548721%22%3Bs%3A9%3A%22CSRFToken%22%3Bs%3A32%3A%220222f842e69abac855b19f6f03bd6bff%22%3Bs%3A5%3A%22email%22%3Bs%3A29%3A%22kunal.keshri%2BExotel%40exotel.in%22%3Bs%3A7%3A%22user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A8%3A%22is_admin%22%3Bs%3A1%3A%221%22%3Bs%3A8%3A%22loggedin%22%3Bs%3A1%3A%221%22%3Bs%3A9%3A%22signature%22%3Bs%3A40%3A%226817f9e40f58f3f76b67eff20893d4ff20a10e7c%22%3Bs%3A11%3A%22permissions%22%3Bs%3A6%3A%22524287%22%3Bs%3A4%3A%22role%22%3Bs%3A5%3A%22admin%22%3Bs%3A9%3A%22tenant_id%22%3Bs%3A2%3A%2215%22%3Bs%3A10%3A%22session-id%22%3Bs%3A32%3A%22963e1fb30031c31c1de6dc9626e1d4f7%22%3Bs%3A20%3A%22exometrix_user_email%22%3Bs%3A27%3A%22sudheer.shet%2Buber%40exotel.in%22%3Bs%3A17%3A%22exometrix_user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A13%3A%22impersonation%22%3Bs%3A1%3A%221%22%3Bs%3A21%3A%22appstore_noappbuilder%22%3Bs%3A0%3A%22%22%3Bs%3A22%3A%22isNumberMaskingEnabled%22%3Bs%3A0%3A%22%22%3Bs%3A18%3A%22lead_assist_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A17%3A%22telephonix_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22package_pricing%22%3Bs%3A1%3A%221%22%3Bs%3A13%3A%22graphite_user%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22gateway_user%22%3Bs%3A1%3A%221%22%3Bs%3A27%3A%22call_rating_feature_enabled%22%3Bs%3A0%3A%22%22%3Bs%3A13%3A%22import_export%22%3Bs%3A1%3A%221%22%3Bs%3A14%3A%22account-closed%22%3Bs%3A1%3A%220%22%3B%7D041bd5c46509a3b6a96c12b7cca0cb1e; _BEAMER_FILTER_BY_URL_zjgijTOv17039=false; _BEAMER_LAST_UPDATE_zjgijTOv17039=1632985460667; _ga=GA1.2.1430747560.1614955619; _gat_UA-24392938-7=1; _ga_VDLHZGRNP9=GS1.1.1632985342.140.1.1632985510.60",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/sms-campaigns",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "sms-campaigns"
+          ],
+          "query": [
+            {
+              "key": "offset",
+              "value": "",
+              "description": "This is the position in the dataset of a particular record. By specifying offset, you retrieve a subset of records starting with the offset value. Offset is zero-based i.e. the 10th record is at offset 9",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "",
+              "description": "number of records on single page default:20 maximum=50",
+              "disabled": true
+            },
+            {
+              "key": "name",
+              "value": "",
+              "description": "Search by campaign name. Min 3 letters. (like %xxx%)",
+              "disabled": true
+            },
+            {
+              "key": "status",
+              "value": "",
+              "description": "This will respect given statuses. By default all records will be populated of all status. However, you can filter on set of status too. eg, status=in-progress, scheduled etc.",
+              "disabled": true
+            },
+            {
+              "key": "sort_by",
+              "value": "",
+              "description": "This indicates in what order the campaign records are sorted in the API response. By default records are sorted by ScheduleTime in descending order. However, you can override the same in following way for ascending order: Eg: schedule.start_time:asc, name:asc, name:desc (alphabetical order A-z, Z-A)",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get campaign SMS details",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept-encoding": true,
+          "user-agent": true,
+          "connection": true
+        }
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "authority",
+            "value": "test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"89\", \"Chromium\";v=\"89\", \";Not A Brand\";v=\"99\"",
+            "disabled": true
+          },
+          {
+            "key": "accept",
+            "value": "application/json, text/plain, */*",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0",
+            "disabled": true
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+            "disabled": true
+          },
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=----WebKitFormBoundaryaJirYv3mOl6AZNxV",
+            "disabled": true
+          },
+          {
+            "key": "origin",
+            "value": "https://test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "same-origin",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "cors",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "empty",
+            "disabled": true
+          },
+          {
+            "key": "referer",
+            "value": "https://test.exotel.com/Exotel/campaigns_v2/",
+            "disabled": true
+          },
+          {
+            "key": "accept-language",
+            "value": "en-GB,en-US;q=0.9,en;q=0.8",
+            "disabled": true
+          },
+          {
+            "key": "cookie",
+            "value": "_BEAMER_FIRST_VISIT_zjgijTOv17039=2021-03-05T14:47:18.237Z; _BEAMER_DATE_zjgijTOv17039=2021-04-16T12:52:38.762Z; _BEAMER_LAST_PUSH_PROMPT_INTERACTION_zjgijTOv17039=1622541713989; _BEAMER_USER_ID_zjgijTOv17039=b2dff76f-8ae4-403d-8fd7-37b9beb77f1f; _fbp=fb.1.1626946358405.1759689054; _gcl_au=1.1.901627027.1627906451; zabUserId=1628161767420zabu0.3587311286521486; _hp2_props.2826793817=%7B%22account_state%22%3A%22active%22%2C%22account_plan%22%3A%22Estate%20Jan%2019%22%2C%22billing_cycle%22%3Anull%7D; _BEAMER_USER_ID_CkAnkUkX19260=03e97db3-6b16-4083-8d9f-d0effb6102f0; _BEAMER_FIRST_VISIT_CkAnkUkX19260=2021-08-13T12:52:47.941Z; _BEAMER_DATE_CkAnkUkX19260=2021-05-16T06:37:13.000Z; _hp2_id.2826793817=%7B%22userId%22%3A%228313626585973303%22%2C%22pageviewId%22%3A%223973346851892971%22%2C%22sessionId%22%3A%223055046360591346%22%2C%22identity%22%3A%223011494817%22%2C%22trackerVersion%22%3A%224.0%22%2C%22identityField%22%3Anull%2C%22isIdentified%22%3A1%7D; utms=%7B%22utm_source%22%3A%22google%22%2C%22utm_medium%22%3A%22cpc%22%2C%22utm_campaign%22%3A%22ET-002-Search-SG-Brand%22%2C%22utm_term%22%3A%22exotel%22%7D; _gac_UA-24392938-1=1.1631533352.CjwKCAjw7fuJBhBdEiwA2lLMYWN4BVC12Tr2gxTCbjCA52uKdP63JyZkDiMA-lBk3_FGom5jSJeX1xoCEn8QAvD_BwE; cl3826bfck60ze_uid=cl3826bfck60ze639d2207-57d8-4c27-b468-1b72c69655bf; cl3826bfck60ze_sid=CL-c4795c4a-c817-43b3-8f27; cl3826bfck60ze_gid=cl3826bfck60ze8709e3f5-3be1-47e6-a45d-f545e15368b2; cl3826bfck60ze_eidsTracked=true; redial-list=%7B%22maxRedial%22%3A10%2C%22redialList%22%3A%5B%2208789063359%22%5D%7D; __ca__chat=jscqybss99zw; zps-tgr-dts=sc%3D15-expAppOnNewSession%3D%5B%5D-pc%3D7-sesst%3D1632547214353; _fw_crm_v=253cf6cc-5687-43f5-f708-beedddff0291; _gid=GA1.2.2012369787.1632675917; exoteloblx_session=a%3A28%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22f784dd41117eda7ece8d08a19185c416%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22103.147.128.118%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A50%3A%22Mozilla%2F5.0+%28X11%3B+Linux+x86_64%29+AppleWebKit%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bs%3A10%3A%221632985339%22%3Bs%3A10%3A%22created_at%22%3Bs%3A10%3A%221632548721%22%3Bs%3A9%3A%22CSRFToken%22%3Bs%3A32%3A%220222f842e69abac855b19f6f03bd6bff%22%3Bs%3A5%3A%22email%22%3Bs%3A29%3A%22kunal.keshri%2BExotel%40exotel.in%22%3Bs%3A7%3A%22user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A8%3A%22is_admin%22%3Bs%3A1%3A%221%22%3Bs%3A8%3A%22loggedin%22%3Bs%3A1%3A%221%22%3Bs%3A9%3A%22signature%22%3Bs%3A40%3A%226817f9e40f58f3f76b67eff20893d4ff20a10e7c%22%3Bs%3A11%3A%22permissions%22%3Bs%3A6%3A%22524287%22%3Bs%3A4%3A%22role%22%3Bs%3A5%3A%22admin%22%3Bs%3A9%3A%22tenant_id%22%3Bs%3A2%3A%2215%22%3Bs%3A10%3A%22session-id%22%3Bs%3A32%3A%22963e1fb30031c31c1de6dc9626e1d4f7%22%3Bs%3A20%3A%22exometrix_user_email%22%3Bs%3A27%3A%22sudheer.shet%2Buber%40exotel.in%22%3Bs%3A17%3A%22exometrix_user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A13%3A%22impersonation%22%3Bs%3A1%3A%221%22%3Bs%3A21%3A%22appstore_noappbuilder%22%3Bs%3A0%3A%22%22%3Bs%3A22%3A%22isNumberMaskingEnabled%22%3Bs%3A0%3A%22%22%3Bs%3A18%3A%22lead_assist_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A17%3A%22telephonix_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22package_pricing%22%3Bs%3A1%3A%221%22%3Bs%3A13%3A%22graphite_user%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22gateway_user%22%3Bs%3A1%3A%221%22%3Bs%3A27%3A%22call_rating_feature_enabled%22%3Bs%3A0%3A%22%22%3Bs%3A13%3A%22import_export%22%3Bs%3A1%3A%221%22%3Bs%3A14%3A%22account-closed%22%3Bs%3A1%3A%220%22%3B%7D041bd5c46509a3b6a96c12b7cca0cb1e; _BEAMER_FILTER_BY_URL_zjgijTOv17039=false; _BEAMER_LAST_UPDATE_zjgijTOv17039=1632985460667; _ga=GA1.2.1430747560.1614955619; _gat_UA-24392938-7=1; _ga_VDLHZGRNP9=GS1.1.1632985342.140.1.1632985510.60",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/sms-campaigns/:campaignID/sms-details",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "sms-campaigns",
+            ":campaignID",
+            "sms-details"
+          ],
+          "variable": [
+            {
+              "key": "campaignID",
+              "value": null,
+              "description": "ID of campaign whose SMS details are to be gotten"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "take action on SMS campaign",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "accept-encoding": true,
+          "user-agent": true,
+          "connection": true
+        }
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "authority",
+            "value": "test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Google Chrome\";v=\"89\", \"Chromium\";v=\"89\", \";Not A Brand\";v=\"99\"",
+            "disabled": true
+          },
+          {
+            "key": "accept",
+            "value": "application/json, text/plain, */*",
+            "disabled": true
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0",
+            "disabled": true
+          },
+          {
+            "key": "user-agent",
+            "value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+            "disabled": true
+          },
+          {
+            "key": "content-type",
+            "value": "multipart/form-data; boundary=----WebKitFormBoundaryaJirYv3mOl6AZNxV",
+            "disabled": true
+          },
+          {
+            "key": "origin",
+            "value": "https://test.exotel.com",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-site",
+            "value": "same-origin",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-mode",
+            "value": "cors",
+            "disabled": true
+          },
+          {
+            "key": "sec-fetch-dest",
+            "value": "empty",
+            "disabled": true
+          },
+          {
+            "key": "referer",
+            "value": "https://test.exotel.com/Exotel/campaigns_v2/",
+            "disabled": true
+          },
+          {
+            "key": "accept-language",
+            "value": "en-GB,en-US;q=0.9,en;q=0.8",
+            "disabled": true
+          },
+          {
+            "key": "cookie",
+            "value": "_BEAMER_FIRST_VISIT_zjgijTOv17039=2021-03-05T14:47:18.237Z; _BEAMER_DATE_zjgijTOv17039=2021-04-16T12:52:38.762Z; _BEAMER_LAST_PUSH_PROMPT_INTERACTION_zjgijTOv17039=1622541713989; _BEAMER_USER_ID_zjgijTOv17039=b2dff76f-8ae4-403d-8fd7-37b9beb77f1f; _fbp=fb.1.1626946358405.1759689054; _gcl_au=1.1.901627027.1627906451; zabUserId=1628161767420zabu0.3587311286521486; _hp2_props.2826793817=%7B%22account_state%22%3A%22active%22%2C%22account_plan%22%3A%22Estate%20Jan%2019%22%2C%22billing_cycle%22%3Anull%7D; _BEAMER_USER_ID_CkAnkUkX19260=03e97db3-6b16-4083-8d9f-d0effb6102f0; _BEAMER_FIRST_VISIT_CkAnkUkX19260=2021-08-13T12:52:47.941Z; _BEAMER_DATE_CkAnkUkX19260=2021-05-16T06:37:13.000Z; _hp2_id.2826793817=%7B%22userId%22%3A%228313626585973303%22%2C%22pageviewId%22%3A%223973346851892971%22%2C%22sessionId%22%3A%223055046360591346%22%2C%22identity%22%3A%223011494817%22%2C%22trackerVersion%22%3A%224.0%22%2C%22identityField%22%3Anull%2C%22isIdentified%22%3A1%7D; utms=%7B%22utm_source%22%3A%22google%22%2C%22utm_medium%22%3A%22cpc%22%2C%22utm_campaign%22%3A%22ET-002-Search-SG-Brand%22%2C%22utm_term%22%3A%22exotel%22%7D; _gac_UA-24392938-1=1.1631533352.CjwKCAjw7fuJBhBdEiwA2lLMYWN4BVC12Tr2gxTCbjCA52uKdP63JyZkDiMA-lBk3_FGom5jSJeX1xoCEn8QAvD_BwE; cl3826bfck60ze_uid=cl3826bfck60ze639d2207-57d8-4c27-b468-1b72c69655bf; cl3826bfck60ze_sid=CL-c4795c4a-c817-43b3-8f27; cl3826bfck60ze_gid=cl3826bfck60ze8709e3f5-3be1-47e6-a45d-f545e15368b2; cl3826bfck60ze_eidsTracked=true; redial-list=%7B%22maxRedial%22%3A10%2C%22redialList%22%3A%5B%2208789063359%22%5D%7D; __ca__chat=jscqybss99zw; zps-tgr-dts=sc%3D15-expAppOnNewSession%3D%5B%5D-pc%3D7-sesst%3D1632547214353; _fw_crm_v=253cf6cc-5687-43f5-f708-beedddff0291; _gid=GA1.2.2012369787.1632675917; exoteloblx_session=a%3A28%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22f784dd41117eda7ece8d08a19185c416%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A15%3A%22103.147.128.118%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A50%3A%22Mozilla%2F5.0+%28X11%3B+Linux+x86_64%29+AppleWebKit%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bs%3A10%3A%221632985339%22%3Bs%3A10%3A%22created_at%22%3Bs%3A10%3A%221632548721%22%3Bs%3A9%3A%22CSRFToken%22%3Bs%3A32%3A%220222f842e69abac855b19f6f03bd6bff%22%3Bs%3A5%3A%22email%22%3Bs%3A29%3A%22kunal.keshri%2BExotel%40exotel.in%22%3Bs%3A7%3A%22user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A8%3A%22is_admin%22%3Bs%3A1%3A%221%22%3Bs%3A8%3A%22loggedin%22%3Bs%3A1%3A%221%22%3Bs%3A9%3A%22signature%22%3Bs%3A40%3A%226817f9e40f58f3f76b67eff20893d4ff20a10e7c%22%3Bs%3A11%3A%22permissions%22%3Bs%3A6%3A%22524287%22%3Bs%3A4%3A%22role%22%3Bs%3A5%3A%22admin%22%3Bs%3A9%3A%22tenant_id%22%3Bs%3A2%3A%2215%22%3Bs%3A10%3A%22session-id%22%3Bs%3A32%3A%22963e1fb30031c31c1de6dc9626e1d4f7%22%3Bs%3A20%3A%22exometrix_user_email%22%3Bs%3A27%3A%22sudheer.shet%2Buber%40exotel.in%22%3Bs%3A17%3A%22exometrix_user_id%22%3Bs%3A6%3A%22368721%22%3Bs%3A13%3A%22impersonation%22%3Bs%3A1%3A%221%22%3Bs%3A21%3A%22appstore_noappbuilder%22%3Bs%3A0%3A%22%22%3Bs%3A22%3A%22isNumberMaskingEnabled%22%3Bs%3A0%3A%22%22%3Bs%3A18%3A%22lead_assist_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A17%3A%22telephonix_tenant%22%3Bs%3A0%3A%22%22%3Bs%3A15%3A%22package_pricing%22%3Bs%3A1%3A%221%22%3Bs%3A13%3A%22graphite_user%22%3Bs%3A0%3A%22%22%3Bs%3A12%3A%22gateway_user%22%3Bs%3A1%3A%221%22%3Bs%3A27%3A%22call_rating_feature_enabled%22%3Bs%3A0%3A%22%22%3Bs%3A13%3A%22import_export%22%3Bs%3A1%3A%221%22%3Bs%3A14%3A%22account-closed%22%3Bs%3A1%3A%220%22%3B%7D041bd5c46509a3b6a96c12b7cca0cb1e; _BEAMER_FILTER_BY_URL_zjgijTOv17039=false; _BEAMER_LAST_UPDATE_zjgijTOv17039=1632985460667; _ga=GA1.2.1430747560.1614955619; _gat_UA-24392938-7=1; _ga_VDLHZGRNP9=GS1.1.1632985342.140.1.1632985510.60",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"action\": \"pause\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/sms-campaigns/:campaignID",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "sms-campaigns",
+            ":campaignID"
+          ],
+          "variable": [
+            {
+              "key": "campaignID",
+              "value": null,
+              "description": "ID of campaign for which action is to be taken on"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "api.us3.qaexotel.com",
+      "value": "host_dns"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "info": {
+    "_postman_id": "941719ff-1d54-40a1-854f-81917e6b13fe",
+    "name": "test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/44389670-941719ff-1d54-40a1-854f-81917e6b13fe?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "http://Exotel:a2cd755ab3d7492ed7dfdf0dd2ae8410eef9f614@twilix.mum1.exotel.com/v1/Accounts/Exotel/ActiveStreams",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://Exotel:{{vault:authorization-password}}@twilix.mum1.exotel.com/v1/Accounts/Exotel/ActiveStreams",
+          "protocol": "http",
+          "auth": {
+            "user": "Exotel",
+            "password": "{{vault:authorization-password}}"
+          },
+          "host": [
+            "twilix",
+            "mum1",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "Accounts",
+            "Exotel",
+            "ActiveStreams"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - alert [ref=e2]
+  - generic [ref=e3]: Avg Duration
+  - generic [ref=e4]:
+    - navigation [ref=e5]:
+      - generic [ref=e7]:
+        - heading "IVR System" [level=1] [ref=e10]
+        - generic [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: System Administrator
+            - paragraph [ref=e14]: super_admin
+          - button "Logout" [ref=e15] [cursor=pointer]
+    - generic [ref=e16]:
+      - complementary [ref=e17]:
+        - navigation [ref=e18]:
+          - link "📊 Dashboard" [ref=e19] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e20]: 📊
+            - text: Dashboard
+          - link "🔀 IVR Flows" [ref=e21] [cursor=pointer]:
+            - /url: /flows
+            - generic [ref=e22]: 🔀
+            - text: IVR Flows
+          - link "👥 Agents" [ref=e23] [cursor=pointer]:
+            - /url: /agents
+            - generic [ref=e24]: 👥
+            - text: Agents
+          - link "⏳ Queues" [ref=e25] [cursor=pointer]:
+            - /url: /queues
+            - generic [ref=e26]: ⏳
+            - text: Queues
+          - link "📈 Analytics" [ref=e27] [cursor=pointer]:
+            - /url: /analytics
+            - generic [ref=e28]: 📈
+            - text: Analytics
+          - link "🎙️ Recordings" [ref=e29] [cursor=pointer]:
+            - /url: /recordings
+            - generic [ref=e30]: 🎙️
+            - text: Recordings
+      - main [ref=e31]:
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - heading "Real-Time Dashboard" [level=2] [ref=e36]
+              - paragraph [ref=e37]: Live IVR monitoring and analytics
+            - generic [ref=e38]:
+              - generic [ref=e39]: "Phone Number:"
+              - generic [ref=e40]: No phone numbers configured
+          - generic [ref=e41]:
+            - generic [ref=e43]:
+              - generic [ref=e44]:
+                - generic [ref=e45]: Total Calls
+                - img [ref=e46]
+              - paragraph [ref=e48]: "0"
+              - generic [ref=e49]: Live
+            - generic [ref=e51]:
+              - generic [ref=e52]:
+                - generic [ref=e53]: Active Calls
+                - img [ref=e54]
+              - paragraph [ref=e56]: "0"
+            - generic [ref=e58]:
+              - generic [ref=e59]:
+                - generic [ref=e60]: Completed
+                - img [ref=e61]
+              - paragraph [ref=e64]: "0"
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - generic [ref=e68]: Failed
+                - img [ref=e69]
+              - paragraph [ref=e72]: "0"
+            - generic [ref=e74]:
+              - generic [ref=e75]:
+                - generic [ref=e76]: In Queue
+                - img [ref=e77]
+              - paragraph [ref=e82]: "0"
+            - generic [ref=e84]:
+              - generic [ref=e85]:
+                - generic [ref=e86]: Avg Duration
+                - img [ref=e87]
+              - paragraph [ref=e90]: 0m 0s
+          - generic [ref=e91]:
+            - tablist [ref=e92]:
+              - tab "Live Overview" [selected] [ref=e93] [cursor=pointer]
+              - tab "Call Activity" [ref=e94] [cursor=pointer]
+              - tab "Call History" [ref=e95] [cursor=pointer]
+              - tab "Analytics" [ref=e96] [cursor=pointer]
+            - tabpanel "Live Overview"
+```

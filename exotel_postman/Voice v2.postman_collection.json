@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "0d011b51-fafc-4d2d-8341-aa21891cb80d",
+    "name": "Voice v2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-0d011b51-fafc-4d2d-8341-aa21891cb80d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "CCM Make Call",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"from\": {\n        \"user_contact_uri\": \"09953125068\"\n    },\n    \"to\": {\n        \"customer_contact_uri\": \"09953125068\"\n    },\n    \"virtual_number\": \"+918045683339\",\n    \"recording\": true,\n    \"recording_channels\": \"dual\",\n    \"custom_field\": \"12130y124b2f142\",\n    \"status_callback\": [\n    \t {\n            \"event\": \"answered\",\n            \"url\": \"https://hookb.in/eKxXbypxQlfeYYRdZPjy\"\n        },\n        {\n            \"event\": \"terminal\",\n            \"url\": \"https://hookb.in/eKxXbypxQlfeYYRdZPjy\"\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "https://ccm-api.exotel.com/v2/accounts/{{AccountSid}}/calls",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "calls"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CCM Get Call Details",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://ccm-api.exotel.com/v2/accounts/{{AccountSid}}/calls/:call_sid",
+          "protocol": "https",
+          "host": [
+            "ccm-api",
+            "exotel",
+            "com"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "calls",
+            ":call_sid"
+          ],
+          "query": [
+            {
+              "key": "devices.contact_uri",
+              "value": "+919008420311",
+              "disabled": true
+            },
+            {
+              "key": "page_size",
+              "value": "5",
+              "disabled": true
+            },
+            {
+              "key": "offset",
+              "value": "3",
+              "disabled": true
+            }
+          ],
+          "variable": [
+            {
+              "key": "call_sid",
+              "value": null,
+              "description": "call SID of the call that you want to get"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

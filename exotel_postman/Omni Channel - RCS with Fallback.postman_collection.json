@@ -1,0 +1,760 @@
+{
+  "info": {
+    "_postman_id": "488f2f6c-e5e8-4fdb-bb13-ef944771916b",
+    "name": "Omni Channel - RCS with Fallback",
+    "description": "RCS is transforming the way businesses engage with their customers by offering an interactive and dynamic messaging experience that surpasses traditional SMS and WhatsApp. \n\nWith Exotel's RCS APIs, you can now introduce images, videos, interactive CTAs, and powerful yet personalized carousels.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-488f2f6c-e5e8-4fdb-bb13-ef944771916b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Template - Text",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eof1kymrcqi9k1c.m.pipedream.net\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"template\",\n                    \"template\": {\n                        \"name\": \"ShippedMessage\",\n                        \"variables\": {\n                            \"name\":\"Somo\",\n                            \"ORDER_ID\": \"123456\"\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Template - Text with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eof1kymrcqi9k1c.m.pipedream.net\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"template\",\n                    \"template\": {\n                        \"name\": \"ShippedMessage\",\n                        \"variables\": {\n                            \"name\":\"Somo\",\n                            \"ORDER_ID\": \"123456\"\n                        }\n                    }\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार Somo test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "https",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Text",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eof1kymrcqi9k1c.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\":  \"Hello World 1\"\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Text with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eof1kymrcqi9k1c.m.pipedream.net\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\":  \"Hello World 1\"\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार Somo test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - File (Image)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"file\",\n                    \"file\": {\n                        \"link\": \"https://i.ibb.co/HnJScsX/Uber-Logo-Black-RGB.png\"\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - File (Image) with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"file\",\n                    \"file\": {\n                        \"link\": \"https://bestmediainfo.com/uploads/2023/04/1682414764.exotel.jpg\"\n                    }\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Text Replies",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"reply\": {\n                                \"text\": \"suggestion#1\",\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Text Replies with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"reply\": {\n                                \"text\": \"suggestion#1\",\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Dialer Action",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Dial Number\",\n                                \"dialer\": {\n                                    \"dial_phone_number\": {\n                                        \"phone_number\": \"+919419999999\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Dialer Action with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Dial Number\",\n                                \"dialer\": {\n                                    \"dial_phone_number\": {\n                                        \"phone_number\": \"+919419999999\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested URL Action",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Visit Website\",\n                                \"url\": {\n                                    \"open_url\": {\n                                        \"url\": \"https://www.exotel.com\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested URL Action with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Visit Website\",\n                                \"url\": {\n                                    \"open_url\": {\n                                        \"url\": \"https://www.exotel.com\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Calendar Action",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Schedule Meeting\",\n                                \"calendar\": {\n                                    \"create_event\": {\n                                        \"start_time\": \"2017-03-14T00:00:00Z\",\n                                        \"end_time\": \"2017-03-14T01:00:00Z\",\n                                        \"title\": \"1:1 Meeting\",\n                                        \"description\":\"Exotel review meeting\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Calendar Action with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Schedule Meeting\",\n                                \"calendar\": {\n                                    \"create_event\": {\n                                        \"start_time\": \"2017-03-14T00:00:00Z\",\n                                        \"end_time\": \"2017-03-14T01:00:00Z\",\n                                        \"title\": \"1:1 Meeting\",\n                                        \"description\":\"Exotel review meeting\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Map Action",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Show location\",\n                                \"map\": {\n                                    \"show_location\": {\n                                        \"latitude\": 37.4220041,\n                                        \"longitude\": -122.0862515,\n                                        \"label\": \"Google Plex\",\n                                        \"fallback_url\": \"https://www.google.com/maps/@37.4219162,-122.078063,15z\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Map Action with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Show location\",\n                                \"map\": {\n                                    \"show_location\": {\n                                        \"latitude\": 37.4220041,\n                                        \"longitude\": -122.0862515,\n                                        \"label\": \"Google Plex\",\n                                        \"fallback_url\": \"https://www.google.com/maps/@37.4219162,-122.078063,15z\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Map Action (Request Location)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Show location\",\n                                \"map\": {\n                                    \"request_location\": {}\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - Suggested Map Action (Request Location) with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"text\",\n                    \"text\": \"Hello World 1\",\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Show location\",\n                                \"map\": {\n                                    \"request_location\": {}\n                                },\n                                \"postback\": {\n                                    \"data\": \"set_by_chatbot_reply_1\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - RichCard",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"richcard\",\n                    \"richcard\": {\n                        \"message\": {\n                            \"general_purpose_card\": {\n                                \"layout\": {\n                                    \"card_orientation\": \"VERTICAL\",\n                                    \"image_alignment\": \"LEFT\",\n                                    \"title_font_style\": {\n                                        \"font\": \"bold\"\n                                    },\n                                    \"description_font_style\": {\n                                        \"font\": \"italics\"\n                                    }\n                                },\n                                \"content\": {\n                                    \"media\": {\n                                        \"url\": \"https://www.shutterstock.com/image-vector/sale-50-percent-off-handwritten-260nw-1738736357.jpg\",\n                                        \"content_type\": \"image/jpeg\",\n                                        \"file_size\": 14908,\n                                        \"height\": \"MEDIUM_HEIGHT\",\n                                        \"description\": \"Textual description of media content, e. g. for use with screen readers.\"\n                                    },\n                                    \"title\": \"Bumper offer\",\n                                    \"description\": \"Hi Kashish\\n\\nOur end of reason sale is now live.\\n\\nIt’s time to buy items in your wishlist at exclusive discounts.\\n\\nUse code FREE50 to get upto 50% off on your orders.\"\n                                }\n                            }\n                        }\n                    },\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Show location\",\n                                \"url\": {\n                                    \"open_url\": {\n                                        \"url\": \"https://www.myntra.com\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"website_opened\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - RichCard with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"richcard\",\n                    \"richcard\": {\n                        \"message\": {\n                            \"general_purpose_card\": {\n                                \"layout\": {\n                                    \"card_orientation\": \"VERTICAL\",\n                                    \"image_alignment\": \"LEFT\",\n                                    \"title_font_style\": {\n                                        \"font\": \"bold\"\n                                    },\n                                    \"description_font_style\": {\n                                        \"font\": \"italics\"\n                                    }\n                                },\n                                \"content\": {\n                                    \"media\": {\n                                        \"url\": \"https://www.shutterstock.com/image-vector/sale-50-percent-off-handwritten-260nw-1738736357.jpg\",\n                                        \"content_type\": \"image/jpeg\",\n                                        \"file_size\": 14908,\n                                        \"height\": \"MEDIUM_HEIGHT\",\n                                        \"description\": \"Textual description of media content, e. g. for use with screen readers.\"\n                                    },\n                                    \"title\": \"Bumper offer\",\n                                    \"description\": \"Hi Kashish\\n\\nOur end of reason sale is now live.\\n\\nIt’s time to buy items in your wishlist at exclusive discounts.\\n\\nUse code FREE50 to get upto 50% off on your orders.\"\n                                }\n                            }\n                        }\n                    },\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Show location\",\n                                \"url\": {\n                                    \"open_url\": {\n                                        \"url\": \"https://www.myntra.com\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"website_opened\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - RichCard Carousel",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"richcard\",\n                    \"richcard\": {\n                        \"message\": {\n                            \"general_purpose_card_carousel\": {\n                                \"layout\": {\n                                    \"card_width\": \"MEDIUM_WIDTH\",\n                                    \"title_font_style\": {\n                                        \"font\": \"bold\"\n                                    },\n                                    \"description_font_style\": {\n                                        \"font\": \"italics\"\n                                    }\n                                },\n                                \"content\": [\n                                    {\n                                        \"media\": {\n                                            \"url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2427962/2022/4/19/c51f921d-4e01-4c3e-a838-740146e1d59b1650366020434NeutrogenaUltraSheerDryTouchSunblockSPF501.jpg\",\n                                            \"content_type\": \"image/jpeg\",\n                                            \"file_size\": 9024,\n                                            \"thumbnail_url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2427962/2022/4/19/c51f921d-4e01-4c3e-a838-740146e1d59b1650366020434NeutrogenaUltraSheerDryTouchSunblockSPF501.jpg\",\n                                            \"thumbnail_content_type\": \"image/jpeg\",\n                                            \"thumbnail_file_size\": \"9024\",\n                                            \"height\": \"SHORT_HEIGHT\",\n                                            \"description\": \"Textual description of media content, e. g. for use with screen readers.\"\n                                        },\n                                        \"title\": \"Neutrogena UltraSheer Dry Touch Sunblock SPF 50+\",\n                                        \"description\": \"Our new range of skincare products is exactly what you’ve been looking for to stay glam this summer.\"\n                                    },\n                                    {\n                                        \"media\": {\n                                            \"url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17492600/2023/1/5/388ac5a1-dab1-41b6-9916-38111227fca61672919782138-Lakme-9to5-Vitamin-C-Facial-Serum---15ml-4931672919781168-1.jpg\",\n                                            \"content_type\": \"image/jpeg\",\n                                            \"file_size\": 19194,\n                                            \"thumbnail_url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17492600/2023/1/5/388ac5a1-dab1-41b6-9916-38111227fca61672919782138-Lakme-9to5-Vitamin-C-Facial-Serum---15ml-4931672919781168-1.jpg\",\n                                            \"thumbnail_content_type\": \"image/jpeg\",\n                                            \"thumbnail_file_size\": \"19194\",\n                                            \"height\": \"SHORT_HEIGHT\",\n                                            \"description\": \"Textual description of media content, e. g. for use with screen readers.\"\n                                        },\n                                        \"title\": \"Lakme 9to5 Vitamin C+ Facial Serum\",\n                                        \"description\": \"Our new range of skincare products is exactly what you’ve been looking for to stay glam this summer.\"\n                                    }\n                                ]\n                            }\n                        }\n                    },\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Shop now\",\n                                \"url\": {\n                                    \"open_url\": {\n                                        \"url\": \"https://www.myntra.com\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"website_opened\"\n                                }\n                            }\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Freeform - RichCard Carousel with SMS Fallback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"custom_data\": \"ORDER123456\",\n    \"status_callback\": \"https://eoj72flq0lwx2gs.m.pipedream.net/\",\n    \"rcs\": {\n        \"messages\": [\n            {\n                \"from\": \"{{BOT_ID}}\",\n                \"to\": \"{{ToNumber}}\",\n                \"content\": {\n                    \"type\": \"richcard\",\n                    \"richcard\": {\n                        \"message\": {\n                            \"general_purpose_card_carousel\": {\n                                \"layout\": {\n                                    \"card_width\": \"MEDIUM_WIDTH\",\n                                    \"title_font_style\": {\n                                        \"font\": \"bold\"\n                                    },\n                                    \"description_font_style\": {\n                                        \"font\": \"italics\"\n                                    }\n                                },\n                                \"content\": [\n                                    {\n                                        \"media\": {\n                                            \"url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2427962/2022/4/19/c51f921d-4e01-4c3e-a838-740146e1d59b1650366020434NeutrogenaUltraSheerDryTouchSunblockSPF501.jpg\",\n                                            \"content_type\": \"image/jpeg\",\n                                            \"file_size\": 9024,\n                                            \"thumbnail_url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2427962/2022/4/19/c51f921d-4e01-4c3e-a838-740146e1d59b1650366020434NeutrogenaUltraSheerDryTouchSunblockSPF501.jpg\",\n                                            \"thumbnail_content_type\": \"image/jpeg\",\n                                            \"thumbnail_file_size\": \"9024\",\n                                            \"height\": \"SHORT_HEIGHT\",\n                                            \"description\": \"Textual description of media content, e. g. for use with screen readers.\"\n                                        },\n                                        \"title\": \"Neutrogena UltraSheer Dry Touch Sunblock SPF 50+\",\n                                        \"description\": \"Our new range of skincare products is exactly what you’ve been looking for to stay glam this summer.\"\n                                    },\n                                    {\n                                        \"media\": {\n                                            \"url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17492600/2023/1/5/388ac5a1-dab1-41b6-9916-38111227fca61672919782138-Lakme-9to5-Vitamin-C-Facial-Serum---15ml-4931672919781168-1.jpg\",\n                                            \"content_type\": \"image/jpeg\",\n                                            \"file_size\": 19194,\n                                            \"thumbnail_url\": \"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17492600/2023/1/5/388ac5a1-dab1-41b6-9916-38111227fca61672919782138-Lakme-9to5-Vitamin-C-Facial-Serum---15ml-4931672919781168-1.jpg\",\n                                            \"thumbnail_content_type\": \"image/jpeg\",\n                                            \"thumbnail_file_size\": \"19194\",\n                                            \"height\": \"SHORT_HEIGHT\",\n                                            \"description\": \"Textual description of media content, e. g. for use with screen readers.\"\n                                        },\n                                        \"title\": \"Lakme 9to5 Vitamin C+ Facial Serum\",\n                                        \"description\": \"Our new range of skincare products is exactly what you’ve been looking for to stay glam this summer.\"\n                                    }\n                                ]\n                            }\n                        }\n                    },\n                    \"suggestions\": [\n                        {\n                            \"action\": {\n                                \"text\": \"Shop now\",\n                                \"url\": {\n                                    \"open_url\": {\n                                        \"url\": \"https://www.myntra.com\"\n                                    }\n                                },\n                                \"postback\": {\n                                    \"data\": \"website_opened\"\n                                }\n                            }\n                        }\n                    ]\n                },\n                \"fallback\": {\n                    \"sms\": {\n                        \"messages\": {\n                            \"from\": \"{{SENDER_ID}}\",\n                            \"content\": {\n                                \"dlt_entity_id\": \"{{DLT_ENTITY_ID}}\",\n                                \"dlt_template_id\": \"{{DLT_TEMPLATE_ID}}\",\n                                \"sms_type\": \"{{SMS_TYPE}}\",\n                                \"text\":\"नमस्कार User test3, this is a test SMS from Exotel\",\n                                \"priority\": \"{{PRIORITY}}\"\n                            }\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{AuthKey}}:{{AuthToken}}@{{SubDomain}}/v2/accounts/{{AccountSid}}/messages",
+          "protocol": "http",
+          "auth": {
+            "user": "{{AuthKey}}",
+            "password": "{{AuthToken}}"
+          },
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "messages"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "info": {
+    "_postman_id": "7fb60122-dd0f-450a-b4bd-0e09a1563307",
+    "name": "Addressbook - Contacts",
+    "description": "[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/22379282-7fb60122-dd0f-450a-b4bd-0e09a1563307?action=collection%2Ffork&collection-url=entityId%3D22379282-7fb60122-dd0f-450a-b4bd-0e09a1563307%26entityType%3Dcollection%26workspaceId%3Db490bd7c-d3d6-4ee6-b9a6-8b4937d4d820#?env%5BExotel%20SMS%20SGP%5D=W3sia2V5IjoiQXV0aEtleSIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+Iiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6IkF1dGhUb2tlbiIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCB0b2tlbj4iLCJlbmFibGVkIjp0cnVlLCJzZXNzaW9uVmFsdWUiOiI8cmVwbGFjZSB0aGlzIHdpdGggeW91ciBhdXRoIHRva2VuPiIsInNlc3Npb25JbmRleCI6MX0seyJrZXkiOiJTdWJEb21haW4iLCJ2YWx1ZSI6IjxyZXBsYWNlIHRoaXMgd2l0aCB0aGUgYmFzZSBVUkw+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHRoZSBiYXNlIFVSTD4iLCJzZXNzaW9uSW5kZXgiOjJ9LHsia2V5IjoiQWNjb3VudFNpZCIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+Iiwic2Vzc2lvbkluZGV4IjozfV0=)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-7fb60122-dd0f-450a-b4bd-0e09a1563307?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create contacts",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"contacts\": [\n        {\n            \"number\": \"+91XXXXXXXXXX\",\n            \"first_name\": \"captain\",\n            \"last_name\": \"exotel\",\n            \"company_name\": \"Exotel\",\n            \"email\": \"captain@email.com\",\n            \"tag\": \"API\",\n            \"custom_field\": {\n                \"key\": {\n                    \"key1\": \"values1\"\n                } \n            }\n        },\n        {\n            \"number\": \"+91XXXXXXXXXX\",\n            \"first_name\": \"captain\",\n            \"last_name\": \"exotel\",\n            \"company_name\": \"Exotel\",\n            \"email\": \"captain1@email.com\",\n            \"tag\": \"Technician\",\n            \"custom_field\": {\n                \"key\": {\n                    \"key1\": \"values1\"\n                }\n            }\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/contacts",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "contacts"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update single contact",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{   \n    \"first_name\": \"first_name\",\n    \"last_name\": \"last_name\",\n    \"email\": \"first_name@email.com\",\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/contacts/:contactSid",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "contacts",
+            ":contactSid"
+          ],
+          "variable": [
+            {
+              "key": "contactSid",
+              "value": "",
+              "description": "The SID of the contact that you want to update"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update bulk contacts",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"contacts\": [\n        {\n            \"sid\":\"83ba26b7f11c4e75b4043c8b33cebXXX\", \n            \"first_name\": \"first_name\",\n            \"last_name\": \"lastname\"\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/contacts",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "contacts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get details of a contact",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/contacts/:contactSid",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "contacts",
+            ":contactSid"
+          ],
+          "variable": [
+            {
+              "key": "contactSid",
+              "value": null,
+              "description": "The SID of the contact that you want to get"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get details of bulk contacts",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/contacts",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "contacts"
+          ],
+          "query": [
+            {
+              "key": "sort_by",
+              "value": "date_created:asc",
+              "description": "This indicates in what order the campaign records are sorted in the API response. By default records are sorted by DateCreated in ascending order. However, you can override the same in following way for ascending order: Eg: date_created:asc or name:asc",
+              "disabled": true
+            },
+            {
+              "key": "list_sids",
+              "value": "2e7c54f59721436e8974a7acacb35PPP,79fc28b5109948439de8b67509e28CCC",
+              "description": "fetch the details of contacts belonging to a particular list",
+              "disabled": true
+            },
+            {
+              "key": "offset",
+              "value": "1",
+              "description": "This is the position in the dataset of a particular record. By specifying offset, you retrieve a subset of records starting with the offset value. Offset is zero-based i.e. the 10th record is at offset 9",
+              "disabled": true
+            },
+            {
+              "key": "filter",
+              "value": "show_list",
+              "description": "If filter is “show_list” Response will contain associated list data too in contacts. \n\n",
+              "disabled": true
+            },
+            {
+              "key": "name",
+              "value": "%2B9196451220244",
+              "description": "Search by Campaign name ",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "15",
+              "description": "number of records on single page\n\ndefault = 20",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete contact",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/contacts/:contactSid",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "contacts",
+            ":contactSid"
+          ],
+          "variable": [
+            {
+              "key": "contactSid",
+              "value": null,
+              "description": "The SID of the contact that is to be deleted"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+IVR FLOW DIAGRAM - DETAILED EXTRACTION
+======================================
+
+ANALYZING THE IMAGE SYSTEMATICALLY:
+
+The image shows a dark background with multiple colored boxes representing an IVR flow.
+The boxes are connected with arrows showing the call flow path.
+
+Let me identify each section:
+
+TOP SECTION (Starting from center-top):
+- There appear to be several rectangular boxes with text
+- Colors: Yellow (decision/menu nodes), Pink/Purple (action nodes)
+- Multiple branching paths
+
+LEFT SECTION:
+- Appears to be the entry point
+- Sequential flow of nodes
+
+MIDDLE SECTION:
+- Multiple branching paths
+- Several parallel flows
+
+RIGHT SECTION:
+- Appears to show various endpoints
+- Multiple terminal nodes
+
+ATTEMPTING TO READ TEXT IN NODES:
+Unfortunately, due to the image resolution and dark background, I cannot clearly read all the text within each node. The text appears to be small and the contrast makes it difficult to discern specific words.
+
+WHAT I CAN OBSERVE:
+- Node colors: Yellow/Beige (likely decision/menu nodes), Pink/Purple (likely action nodes)
+- Flow structure: Tree-like with multiple branches
+- Complexity: Appears to be a comprehensive IVR system with 15-20+ nodes
+- Connections: Multiple arrows showing flow between nodes
+
+REQUEST FOR CLARIFICATION:
+To accurately recreate this hospital IVR flow, I need either:
+1. A higher resolution version of the image
+2. A text description of the node labels and flow structure
+3. The original diagram file (if available)

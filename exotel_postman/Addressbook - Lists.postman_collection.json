@@ -1,0 +1,545 @@
+{
+  "info": {
+    "_postman_id": "96d4ac1a-e555-4865-b337-61504ee5e866",
+    "name": "Addressbook - Lists",
+    "description": "[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/22379282-96d4ac1a-e555-4865-b337-61504ee5e866?action=collection%2Ffork&collection-url=entityId%3D22379282-96d4ac1a-e555-4865-b337-61504ee5e866%26entityType%3Dcollection%26workspaceId%3Db490bd7c-d3d6-4ee6-b9a6-8b4937d4d820#?env%5BExotel%20SMS%20SGP%5D=W3sia2V5IjoiQXV0aEtleSIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCBrZXk+Iiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6IkF1dGhUb2tlbiIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYXV0aCB0b2tlbj4iLCJlbmFibGVkIjp0cnVlLCJzZXNzaW9uVmFsdWUiOiI8cmVwbGFjZSB0aGlzIHdpdGggeW91ciBhdXRoIHRva2VuPiIsInNlc3Npb25JbmRleCI6MX0seyJrZXkiOiJTdWJEb21haW4iLCJ2YWx1ZSI6IjxyZXBsYWNlIHRoaXMgd2l0aCB0aGUgYmFzZSBVUkw+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHRoZSBiYXNlIFVSTD4iLCJzZXNzaW9uSW5kZXgiOjJ9LHsia2V5IjoiQWNjb3VudFNpZCIsInZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+IiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiPHJlcGxhY2UgdGhpcyB3aXRoIHlvdXIgYWNjb3VudCBTSUQ+Iiwic2Vzc2lvbkluZGV4IjozfV0=)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51576447",
+    "_collection_link": "https://go.postman.co/collection/22379282-96d4ac1a-e555-4865-b337-61504ee5e866?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create list",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"lists\": [\n        {\n            \"name\": \"list732\"\n        },\n        {\n            \"name\": \"list234\"\n        },\n        {\n            \"name\": \"list999\"\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "add contacts to a list",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"contact_references\": [\n        {\n            \"contact_sid\": \"{{contact-sid}}\"\n        },\n        {\n            \"contact_sid\": \"{{contact-sid}}\"\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists/:listSid/contacts",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists",
+            ":listSid",
+            "contacts"
+          ],
+          "variable": [
+            {
+              "key": "listSid",
+              "value": "",
+              "description": "ID of list where Contacts are to be added"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "add contacts to a list via CSV",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "list_name",
+              "value": "csv_list124",
+              "type": "text"
+            },
+            {
+              "key": "file_name",
+              "type": "file",
+              "src": "/home/bhoopesh/Documents/bulk_contacts.csv"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/contacts/csv-upload",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "contacts",
+            "csv-upload"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update single list",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"updated_list\"\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists/:listSid",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists",
+            ":listSid"
+          ],
+          "variable": [
+            {
+              "key": "listSid",
+              "value": null,
+              "description": "SID of the list that needs to be updated"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update bulk lists",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"lists\": [\n        { \n           \"sid\": \"d49b7a4781ea45dcb702825ce3049XXX\", \n           \"name\": \"list_123\" },\n        {\n           \"sid\": \"e59b7a4781ea45dcb702825ce3049CCC\", \n           \"name\": \"list_456\" \n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists/",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete list",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists/:listSid",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists",
+            ":listSid"
+          ],
+          "variable": [
+            {
+              "key": "listSid",
+              "value": "",
+              "description": "ID of list that is to be deleted"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get single list",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists/:listSid",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists",
+            ":listSid"
+          ],
+          "variable": [
+            {
+              "key": "listSid",
+              "value": "",
+              "description": "ID of list that needs to be gotten"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get bulk lists",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists"
+          ],
+          "query": [
+            {
+              "key": "sort_by",
+              "value": "date_created:desc",
+              "description": "This indicates in what order the lists records are sorted in the API response. By default records are sorted by DateCreated in ascending order. However, you can override the same in following way for ascending order: Eg: date_created:asc or name:asc",
+              "disabled": true
+            },
+            {
+              "key": "name",
+              "value": "list2",
+              "description": "Search on lists name",
+              "disabled": true
+            },
+            {
+              "key": "offset",
+              "value": "",
+              "description": "This is the position in the dataset of a particular record. By specifying offset, you retrieve a subset of records starting with the offset value. Offset is zero-based i.e. the 10th record is at offset 9",
+              "disabled": true
+            },
+            {
+              "key": "limit",
+              "value": "",
+              "description": "number of records on single page default:20",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get contacts in a list",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists/:listSid/contacts",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists",
+            ":listSid",
+            "contacts"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            }
+          ],
+          "variable": [
+            {
+              "key": "listSid",
+              "value": "",
+              "description": "SID of list whose contacts need to be gotten"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "remove contacts from list",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "{{AuthToken}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "{{AuthKey}}",
+              "type": "string"
+            },
+            {
+              "key": "showPassword",
+              "value": false,
+              "type": "boolean"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://{{SubDomain}}/v2/accounts/{{AccountSid}}/lists/:listSid/contacts/:contactsSid",
+          "protocol": "https",
+          "host": [
+            "{{SubDomain}}"
+          ],
+          "path": [
+            "v2",
+            "accounts",
+            "{{AccountSid}}",
+            "lists",
+            ":listSid",
+            "contacts",
+            ":contactsSid"
+          ],
+          "variable": [
+            {
+              "key": "listSid",
+              "value": "",
+              "description": "SID of list whose contacts that are to be deleted"
+            },
+            {
+              "key": "contactsSid",
+              "value": null,
+              "description": "SIDs of contacts that need to be deleted from the list"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

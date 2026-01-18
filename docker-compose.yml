@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ivr-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ivr_system
+      POSTGRES_USER: ivr_user
+      POSTGRES_PASSWORD: ivr_password_change_in_production
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ivr_user -d ivr_system"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ivr-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: ivr-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - ivr-network
+
+  # NestJS Backend
+  backend:
+    build:
+      context: ./ivr-backend
+      dockerfile: Dockerfile
+      target: development
+    container_name: ivr-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DATABASE_URL: postgresql://ivr_user:ivr_password_change_in_production@postgres:5432/ivr_system
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      JWT_SECRET: ${JWT_SECRET:-your_super_secret_jwt_key_change_in_production_12345}
+      JWT_EXPIRES_IN: 3600
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-your_super_secret_refresh_key_change_in_production_67890}
+      JWT_REFRESH_EXPIRES_IN: 604800
+      EXOTEL_API_KEY: ${EXOTEL_API_KEY}
+      EXOTEL_API_SECRET: ${EXOTEL_API_SECRET}
+      EXOTEL_SID: ${EXOTEL_SID}
+      EXOTEL_FROM_NUMBER: ${EXOTEL_FROM_NUMBER:-+919876543210}
+      EXOTEL_CALLER_ID: ${EXOTEL_CALLER_ID:-+919876543210}
+      EXOTEL_BASE_URL: https://api.exotel.com
+      NGROK_URL: ${NGROK_URL:-http://localhost:3001}
+      FRONTEND_URL: http://localhost:3000
+      LOG_LEVEL: debug
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./ivr-backend:/app
+      - /app/node_modules
+      - /app/dist
+    command: sh -c "npx prisma generate && npx prisma migrate deploy && npm run start:dev"
+    networks:
+      - ivr-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./ivr-frontend
+      dockerfile: Dockerfile
+      target: development
+    container_name: ivr-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+      NODE_ENV: development
+    depends_on:
+      - backend
+    volumes:
+      - ./ivr-frontend:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - ivr-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  ivr-network:
+    driver: bridge

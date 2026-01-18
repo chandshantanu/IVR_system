@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Medical Color Palette - Light Mode */
+
+    /* Primary (Medical Teal) */
+    --primary: 186 85% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary (Healthcare Green) */
+    --secondary: 142 71% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent (Wellness Purple) */
+    --accent: 262 52% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Neutral (Clean Hospital Gray) */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 27%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 16% 47%;
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 186 85% 48%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+
+    /* Status Colors */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --success-bg: 142 71% 95%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 215 25% 27%;
+    --warning-bg: 38 92% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-bg: 0 72% 95%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    --info-bg: 199 89% 95%;
+
+    /* Border Radius */
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Medical Color Palette - Dark Mode */
+
+    /* Primary (Medical Teal) */
+    --primary: 186 85% 48%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary (Healthcare Green) */
+    --secondary: 142 71% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Accent (Wellness Purple) */
+    --accent: 262 52% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Neutral (Dark Medical Theme) */
+    --background: 215 25% 12%;
+    --foreground: 210 20% 98%;
+    --card: 215 25% 16%;
+    --card-foreground: 210 20% 98%;
+    --muted: 215 25% 20%;
+    --muted-foreground: 215 16% 65%;
+    --border: 215 20% 25%;
+    --input: 215 20% 25%;
+    --ring: 186 85% 48%;
+
+    /* Popover */
+    --popover: 215 25% 16%;
+    --popover-foreground: 210 20% 98%;
+
+    /* Status Colors (Dark Mode) */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --success-bg: 142 71% 15%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-bg: 38 92% 15%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-bg: 0 72% 15%;
+
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    --info-bg: 199 89% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
